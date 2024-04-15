@@ -24,7 +24,7 @@ const Gallery: React.FC = () => {
         <div className={styles.gallery}>
             <AddPhoto />
             <div className={styles.photos}>
-                {data.map((photo: TPhoto) => (
+                {data.map((photo) => (
                     <NavLink key={photo.id} to={`/photo/${photo.id}`}>
                         <ItemPhoto photo={photo} />
                     </NavLink>

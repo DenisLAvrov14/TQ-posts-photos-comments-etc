@@ -9,3 +9,20 @@
 .inputs input:not(:last-child) {
   margin-right: 10px;
 }
+
+.inputsSubmitBtn {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: whitesmoke;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0;
+}
+
+.inputsSubmitBtn:hover {
+  background-color: aquamarine;
+  color: darkgray;
+}

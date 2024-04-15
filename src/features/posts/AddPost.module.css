@@ -21,7 +21,7 @@
   border: 1px solid #ccc;
 }
 
-.addPost button {
+.submitBtn {
   width: 100%;
   padding: 10px 20px;
   background-color: whitesmoke;
@@ -33,7 +33,7 @@
   margin: 0;
 }
 
-.addPost button:hover {
+.submitBtn:hover {
   background-color: aquamarine;
   color: darkgray;
 }

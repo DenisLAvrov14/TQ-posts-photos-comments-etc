@@ -1,80 +1,85 @@
-import { SetStateAction, useCallback, useState } from "react";
+import { useCallback, useState, ChangeEvent } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import postsService from "../../services/postsService";
-import styles from "./AddPost.module.css"
+import styles from "./AddPost.module.css";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+type PostFormFields = {
+    title: string;
+    content: string;
+};
 
 const AddPostForm = () => {
     const queryClient = useQueryClient();
-
+    const { register, handleSubmit, formState: { errors } } = useForm<PostFormFields>();
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
 
-    const onTitleChange = (e: { target: { value: SetStateAction<string> } }) =>
-        setTitle(e.target.value);
-    const onContentChanged = (e: { target: { value: SetStateAction<string> } }) =>
-        setContent(e.target.value);
+    const onTitleChange = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value),
+        []
+    );
+
+    const onContentChanged = useCallback(
+        (e: ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value),
+        []
+    );
 
     const getNextId = (): number => {
-        // use uuidv4
-        // Math.floor(Math.random() * 100000)
+        // use uuidv4 or a more reliable method to generate unique ids
         return Math.floor(Math.random() * (9999 - 500 + 1)) + 500;
     };
 
     const mutationAddPost = useMutation({
-        mutationFn: async () => {
+        mutationFn: async (data: PostFormFields) => {
             const result = await postsService.addPost({
                 userId: getNextId(),
                 id: getNextId(),
-                title: title,
-                body: content,
+                title: data.title,
+                body: data.content,
             });
             return result;
         },
 
         onSuccess: () => {
-            setContent("")
-            setTitle("")
+            setContent("");
+            setTitle("");
             queryClient.invalidateQueries({ queryKey: ["posts"] });
         },
     });
 
-    const handleAddPost = useCallback(
-        async (event: React.MouseEvent<HTMLButtonElement>) => {
-            event.preventDefault();
-            try {
-                await mutationAddPost.mutate();
-            } catch (error) {
-                console.error("Error adding post:", error);
-            }
-        },
-        [mutationAddPost]
-    );
+    const onSubmit: SubmitHandler<PostFormFields> = async (data) => {
+        try {
+            await mutationAddPost.mutate(data);
+        } catch (error) {
+            console.error("Error adding post:", error);
+        }
+    };
 
     return (
         <section className={styles.addPost}>
             <h2>Add a New Post</h2>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="postTitle">Post Title:</label>
                 <input
                     type="text"
                     id="postTitle"
-                    name="postTitle"
+                    {...register("title", { required: true })}
                     value={title}
                     onChange={onTitleChange}
                 />
                 <label htmlFor="postContent">Content:</label>
                 <textarea
                     id="postContent"
-                    name="postContent"
+                    {...register("content", { required: true })}
                     value={content}
                     onChange={onContentChanged}
                 />
-                <button type="button" onClick={handleAddPost}>
-                    Save Post
-                </button>
+                <input type="submit" value="Save" className={styles.submitBtn} />
             </form>
         </section>
     );
 };
+
 export default AddPostForm;

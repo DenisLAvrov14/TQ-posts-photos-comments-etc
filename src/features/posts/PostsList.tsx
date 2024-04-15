@@ -26,9 +26,16 @@ const PostsList: React.FC<Props> = ({ post }) => {
     });
 
     const handleDeletePost = useCallback(async () => {
-        await mutationDeletePost.mutate(post.id);
-        alert("Comment was deleted");
+        try {
+            await mutationDeletePost.mutate(post.id);
+            alert("Comment was deleted");
+        } catch (error) {
+            console.error("Error deleting comment:", error);
+            // Дополнительная логика обработки ошибок
+            alert("Error deleting comment. Please try again later.");
+        }
     }, [mutationDeletePost, post]);
+
 
     const { data, isLoading, isError } = usePosts();
 

@@ -1,9 +1,9 @@
 .slider {
   display: flex;
-  justify-content: center; /* Центрируем контейнер по горизонтали */
-  align-items: center; /* Центрируем контейнер по вертикали */
-  height: 100vh; /* Задаем высоту контейнера на весь экран */
-  margin: 0; /* Убираем отступы по умолчанию */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
 .card {
@@ -33,7 +33,7 @@ section {
   background-color: aqua;
 }
 
-.clamped-text {
+.clampedText {
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;

@@ -1,15 +1,15 @@
 import React, { ChangeEvent, useCallback } from "react";
 import { InputsProps } from "../../models/TInputs";
-import { SubmitHandler, useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import commentsServices from "../../services/commentsServices";
-import styles from "./inputs.module.css"
+import styles from "./inputs.module.css";
 
 type CommentFormFields = {
-    comment: string
-    name: string
-    email: string
-}
+    comment: string;
+    name: string;
+    email: string;
+};
 
 const Inputs: React.FC<InputsProps> = ({
     comment,
@@ -20,14 +20,19 @@ const Inputs: React.FC<InputsProps> = ({
     setEmail,
     post
 }) => {
-
     const queryClient = useQueryClient();
+    const { register, handleSubmit, formState: { errors } } = useForm<CommentFormFields>();
 
-    const { register, handleSubmit } = useForm<CommentFormFields>();
-
-    const onSubmit: SubmitHandler<CommentFormFields> = (data) => {
-        console.log(data)
-    }
+    const onSubmit: SubmitHandler<CommentFormFields> = async (data) => {
+        try {
+            await mutationAddComment.mutate(data);
+            setComment(""); // Сбрасываем значения после успешной отправки
+            setName("");
+            setEmail("");
+        } catch (error) {
+            console.error("Error adding comment:", error);
+        }
+    };
 
     const handleInputChange = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
@@ -50,48 +55,29 @@ const Inputs: React.FC<InputsProps> = ({
         [setEmail]
     );
 
-    const getNextId = (): number => {
-        return Math.floor(Math.random() * (9999 - 500 + 1)) + 500;
-    };
-
     const mutationAddComment = useMutation({
-        mutationFn: async () => {
+        mutationFn: async (formData: CommentFormFields) => {
             const result = await commentsServices.addComment({
                 postId: post.id,
                 id: getNextId(),
-                name: name,
-                email: email,
-                body: comment,
+                name: formData.name,
+                email: formData.email,
+                body: formData.comment,
             });
             return result;
         },
-
         onSuccess: () => {
-            // react-hook-form
-            setComment("");
-            setName("");
-            setEmail("");
             queryClient.invalidateQueries({ queryKey: ["comments"] });
         },
     });
 
-
-
-    const handleAddComment = useCallback(
-        async (event: React.MouseEvent<HTMLButtonElement>) => {
-            event.preventDefault();
-            try {
-                await mutationAddComment.mutate();
-            } catch (error) {
-                console.error("Error adding comment:", error);
-            }
-        },
-        [mutationAddComment]
-    );
+    const getNextId = (): number => {
+        return Math.floor(Math.random() * (9999 - 500 + 1)) + 500;
+    };
 
     const validateEmail = (value: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(value);
+        return emailRegex.test(value) || "Invalid email format";
     };
 
     return (
@@ -104,16 +90,21 @@ const Inputs: React.FC<InputsProps> = ({
                     value={name}
                     onChange={handleInputNameChange}
                 />
+                {errors.name && <p className={styles.error}>Name is required</p>}
                 <input
                     type="text"
                     placeholder="Email"
                     {...register("email", {
                         required: "Email is required",
-                        validate: (value) => validateEmail(value) || "Invalid email format"
+                        pattern: {
+                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                            message: "Invalid email format",
+                        },
                     })}
                     value={email}
                     onChange={handleInputEmailChange}
                 />
+                {errors.email && <p className={styles.error}>{errors.email.message}</p>}
             </div>
             <input
                 type="text"
@@ -122,10 +113,10 @@ const Inputs: React.FC<InputsProps> = ({
                 value={comment}
                 onChange={handleInputChange}
             />
-            <input type="submit" value="Submit" />
+            {errors.comment && <p className={styles.error}>Comment is required</p>}
+            <input type="submit" value="Submit" className={styles.inputsSubmitBtn} />
         </form>
-
     );
 };
 
-export default Inputs
+export default Inputs;
