@@ -4,6 +4,7 @@ import { useComments } from '../../hooks/useComments';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import commentsServices from '../../services/commentsServices';
 import { Post } from '../../models/Posts';
+import styles from "./fakePost.module.css"
 
 interface FakeCommentsProps {
     randomComments: TComments[];
@@ -65,7 +66,7 @@ const FakeComments: React.FC<FakeCommentsProps> = ({ randomComments, setRandomCo
 
 
     return (
-        <>
+        <div className={styles.fakeComments}>
             {randomComments.map((fakeComment) => (
                 <article key={fakeComment.id}>
                     <h3>{fakeComment.name}</h3>
@@ -74,7 +75,8 @@ const FakeComments: React.FC<FakeCommentsProps> = ({ randomComments, setRandomCo
                     <button onClick={onDeleteComment}>Delete comment</button>
                 </article>
             ))}
-        </>
+        </div>
+
     );
 };
 

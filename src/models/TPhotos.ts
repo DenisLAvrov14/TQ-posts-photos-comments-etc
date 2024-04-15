@@ -1,4 +1,4 @@
-export type TPhotos = {
+export type TPhoto = {
   albumId: number;
   id: number;
   title: string;

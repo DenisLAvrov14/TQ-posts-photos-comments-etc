@@ -1,13 +1,9 @@
 import { SetStateAction, useCallback, useState } from "react";
-import { useDispatch, useSelector } from "../../app/store";
-import { addPost } from "./postsSlice";
-import { nanoid } from "@reduxjs/toolkit";
-import { usePosts } from "../../hooks/usePosts";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import postsService from "../../services/postsService";
+import styles from "./AddPost.module.css"
 
 const AddPostForm = () => {
-    // const dispatch = useDispatch();
     const queryClient = useQueryClient();
 
 
@@ -55,23 +51,8 @@ const AddPostForm = () => {
         [mutationAddPost]
     );
 
-
-    // const onCreatePost = useCallback(() => {
-    //     if (title && content) {
-    //         dispatch(
-    //             addPost({
-    //                 id: nanoid(),
-    //                 title,
-    //                 content,
-    //             })
-    //         );
-    //         setTitle("");
-    //         setContent("");
-    //     }
-    // }, []);
-
     return (
-        <section>
+        <section className={styles.addPost}>
             <h2>Add a New Post</h2>
             <form>
                 <label htmlFor="postTitle">Post Title:</label>
@@ -82,10 +63,6 @@ const AddPostForm = () => {
                     value={title}
                     onChange={onTitleChange}
                 />
-                {/* <label htmlFor="postAuthor">Author:</label>
-                <select id="postAuthor" >
-                    <option value=""></option>
-                </select> */}
                 <label htmlFor="postContent">Content:</label>
                 <textarea
                     id="postContent"

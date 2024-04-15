@@ -3,9 +3,14 @@ import { usePosts } from "../../hooks/usePosts";
 import Comments from "../comments/Comments";
 import postsService from "../../services/postsService";
 import { useCallback } from "react";
-import { Props } from "../../models/PostProps";
+import { TPost } from "../../models/TPrepare";
+import styles from "./PostList.module.css"
 
-const PostsList: React.FC<Props> = (post) => {
+export type Props = {
+    post: TPost;
+};
+
+const PostsList: React.FC<Props> = ({ post }) => {
     // const posts = useSelector(secetAllPosts)
     const queryClient = useQueryClient();
 
@@ -20,9 +25,9 @@ const PostsList: React.FC<Props> = (post) => {
         },
     });
 
-    const onDeletePost = useCallback(async () => {
-        await mutationDeletePost.mutate(post.post.id);
-        alert("Comment was deleted")
+    const handleDeletePost = useCallback(async () => {
+        await mutationDeletePost.mutate(post.id);
+        alert("Comment was deleted");
     }, [mutationDeletePost, post]);
 
     const { data, isLoading, isError } = usePosts();
@@ -40,22 +45,18 @@ const PostsList: React.FC<Props> = (post) => {
     }
 
     return (
-        <section>
+        <section className={styles.postList}>
             <h2>Posts</h2>
-            {data.map(
-                (
-                    post // article отдельный компонент
-                ) => (
-                    <article className="post" key={post.id}>
-                        <h3>{post.title}</h3>
-                        <p>{post.body}</p>
-                        <button onClick={onDeletePost}> Delete post </button>
-                        <Comments
-                            post={post}
-                        />
-                    </article>
-                )
-            )}
+            {data.map((post) => (
+                <article className="post" key={post.id}>
+                    <h3>{post.title}</h3>
+                    <p>{post.body}</p>
+                    <div className={styles.postBtn}>
+                        <button onClick={handleDeletePost}> Delete post </button>
+                    </div>
+                    <Comments post={post} />
+                </article>
+            ))}
         </section>
     );
 };

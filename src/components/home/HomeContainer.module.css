@@ -1,0 +1,45 @@
+.slider {
+  display: flex;
+  justify-content: center; /* Центрируем контейнер по горизонтали */
+  align-items: center; /* Центрируем контейнер по вертикали */
+  height: 100vh; /* Задаем высоту контейнера на весь экран */
+  margin: 0; /* Убираем отступы по умолчанию */
+}
+
+.card {
+  height: 300px;
+  width: 650px;
+}
+
+p {
+  width: 148px;
+  text-align: center;
+}
+
+section {
+  margin-left: 35px;
+}
+
+.btnLearnMore {
+  margin-left: 9px;
+  padding-left: 4px;
+  padding-right: 4px;
+  background-color: whitesmoke;
+  color: black;
+  transition: background-color 0.3s ease;
+}
+
+.btnLearnMore:hover {
+  background-color: aqua;
+}
+
+.clamped-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+img {
+  margin: 0;
+}

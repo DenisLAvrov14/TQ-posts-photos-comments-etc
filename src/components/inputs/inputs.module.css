@@ -1,0 +1,11 @@
+.inputs {
+  display: flex;
+}
+
+.inputs input {
+  flex-grow: 1;
+}
+
+.inputs input:not(:last-child) {
+  margin-right: 10px;
+}

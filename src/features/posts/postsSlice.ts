@@ -8,12 +8,12 @@ type PostSlice = TPost[];
 
 const initialState: PostSlice = [
   {
-    id: "1",
+    id: 1,
     title: "Learning Redux Toolkit",
     content: "I've heard good things.",
   },
   {
-    id: "2",
+    id: 2,
     title: "Slice...",
     content: "The more I say slice, the more i want pizza.",
   },

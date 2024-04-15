@@ -1,0 +1,29 @@
+.addphoto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* изменено */
+}
+
+.addphoto label {
+  align-self: flex-start; /* изменено */
+  margin-bottom: 10px;
+  text-align: left; /* изменено */
+}
+
+.addphoto button {
+  align-self: stretch; /* изменено */
+  padding: 6px 0;
+  background-color: whitesmoke;
+  margin-left: 1px;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 490px; /* изменено */
+}
+
+.addphoto button:hover {
+  background-color: aquamarine;
+  color: gray;
+}

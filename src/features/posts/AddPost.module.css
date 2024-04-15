@@ -1,0 +1,39 @@
+.addPost {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.addPost form {
+  width: 100%; /* Ширина формы занимает всю доступную ширину */
+}
+
+.addPost label {
+  margin-bottom: 10px;
+}
+
+.addPost input,
+.addPost textarea {
+  width: 100%; /* Инпуты и текстовые поля занимают всю доступную ширину в форме */
+  margin-bottom: 15px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.addPost button {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: whitesmoke;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0;
+}
+
+.addPost button:hover {
+  background-color: aquamarine;
+  color: darkgray;
+}

@@ -3,6 +3,7 @@ import { InputsProps } from "../../models/TInputs";
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import commentsServices from "../../services/commentsServices";
+import styles from "./inputs.module.css"
 
 type CommentFormFields = {
     comment: string
@@ -95,14 +96,7 @@ const Inputs: React.FC<InputsProps> = ({
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input
-                type="text"
-                placeholder="Enter your comment"
-                {...register("comment", { required: true })}
-                value={comment}
-                onChange={handleInputChange}
-            />
-            <div>
+            <div className={styles.inputs}>
                 <input
                     type="text"
                     placeholder="Name"
@@ -121,6 +115,13 @@ const Inputs: React.FC<InputsProps> = ({
                     onChange={handleInputEmailChange}
                 />
             </div>
+            <input
+                type="text"
+                placeholder="Enter your comment"
+                {...register("comment", { required: true })}
+                value={comment}
+                onChange={handleInputChange}
+            />
             <input type="submit" value="Submit" />
         </form>
 

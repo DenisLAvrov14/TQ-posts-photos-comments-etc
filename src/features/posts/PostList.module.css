@@ -1,0 +1,54 @@
+.postList {
+  width: 100%;
+}
+
+.postList h2 {
+  margin-bottom: 20px;
+}
+
+.postList .post {
+  display: flex;
+  justify-content: space-between; /* новое */
+  align-items: center; /* новое */
+  margin-bottom: 20px;
+  padding: 10px; /* изменено */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.postList button {
+  padding: 5px 10px;
+  background-color: whitesmoke;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: auto; /* новое */
+}
+
+.postList button:hover {
+  background-color: #c82333;
+  color: whitesmoke;
+}
+
+.postList .comments {
+  margin-top: 10px;
+}
+
+.postList .comments h3 {
+  text-align: start;
+  margin-bottom: 10px;
+}
+
+.postList p {
+  text-align: start;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.postBtn {
+  display: flex;
+  flex-direction: row-reverse;
+}

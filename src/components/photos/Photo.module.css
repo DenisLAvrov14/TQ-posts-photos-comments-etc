@@ -1,0 +1,32 @@
+.photoCard {
+  margin-top: 10px;
+}
+
+.photo {
+  margin-left: 35px;
+}
+
+a {
+  color: darkgray;
+  text-decoration: none;
+}
+
+button {
+  padding: 0px 5px;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 10px;
+  position: relative;
+  top: -5px; /* Изменено на свойство top */
+  background-color: whitesmoke;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+button:hover {
+  background-color: #c82333;
+}
