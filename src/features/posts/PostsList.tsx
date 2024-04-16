@@ -5,6 +5,7 @@ import postsService from "../../services/postsService";
 import { useCallback } from "react";
 import { TPost } from "../../models/TPrepare";
 import styles from "./PostList.module.css"
+import Button from "../../ui-kit/Button/Button";
 
 export type Props = {
     post: TPost;
@@ -59,7 +60,8 @@ const PostsList: React.FC<Props> = ({ post }) => {
                     <h3>{post.title}</h3>
                     <p>{post.body}</p>
                     <div className={styles.postBtn}>
-                        <button onClick={handleDeletePost}> Delete post </button>
+                        {/* <button onClick={handleDeletePost}> Delete post </button> */}
+                        <Button onClick={handleDeletePost} text={"Delete"} />
                     </div>
                     <Comments post={post} />
                 </article>

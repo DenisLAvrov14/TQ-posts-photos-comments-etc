@@ -4,6 +4,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import commentsServices from "../../services/commentsServices";
 import styles from "./inputs.module.css";
+import Input from "../../ui-kit/Input/Input";
+import Submit from "../../ui-kit/Submit/Submit";
 
 type CommentFormFields = {
     comment: string;
@@ -18,10 +20,14 @@ const Inputs: React.FC<InputsProps> = ({
     setName,
     email,
     setEmail,
-    post
+    post,
 }) => {
     const queryClient = useQueryClient();
-    const { register, handleSubmit, formState: { errors } } = useForm<CommentFormFields>();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<CommentFormFields>();
 
     const onSubmit: SubmitHandler<CommentFormFields> = async (data) => {
         try {
@@ -83,16 +89,18 @@ const Inputs: React.FC<InputsProps> = ({
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.inputs}>
-                <input
-                    type="text"
+                <Input
+                    label={""}
+                    error={""}
+                    className={styles.inputs}
                     placeholder="Name"
                     {...register("name", { required: true })}
                     value={name}
-                    onChange={handleInputNameChange}
-                />
+                    onChange={handleInputNameChange} />
                 {errors.name && <p className={styles.error}>Name is required</p>}
-                <input
-                    type="text"
+                <Input
+                    label={""}
+                    error={""}
                     placeholder="Email"
                     {...register("email", {
                         required: "Email is required",
@@ -102,11 +110,12 @@ const Inputs: React.FC<InputsProps> = ({
                         },
                     })}
                     value={email}
-                    onChange={handleInputEmailChange}
-                />
+                    onChange={handleInputEmailChange} />
                 {errors.email && <p className={styles.error}>{errors.email.message}</p>}
             </div>
-            <input
+            <Input
+                label={""}
+                error={""}
                 type="text"
                 placeholder="Enter your comment"
                 {...register("comment", { required: true })}
@@ -114,7 +123,8 @@ const Inputs: React.FC<InputsProps> = ({
                 onChange={handleInputChange}
             />
             {errors.comment && <p className={styles.error}>Comment is required</p>}
-            <input type="submit" value="Submit" className={styles.inputsSubmitBtn} />
+            {/* <input type="submit" value="Submit" className={styles.inputsSubmitBtn} /> */}
+            <Submit />
         </form>
     );
 };

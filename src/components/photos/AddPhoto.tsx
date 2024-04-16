@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import photosServices from "../../services/photosServices";
 import { TPhoto } from "../../models/TPhotos";
 import styles from "./AddPhoto.module.css"
+import Button from "../../ui-kit/Button/Button";
 
 export const AddPhoto: React.FC = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -69,9 +70,7 @@ export const AddPhoto: React.FC = () => {
                     />
                 </div>
             )}
-            <button type="submit" disabled={!selectedFile}>
-                Upload
-            </button>
+            <Button text={"Upload"} type="submit" disabled={!selectedFile} />
         </form>
     );
 };

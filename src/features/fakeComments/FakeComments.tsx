@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import commentsServices from '../../services/commentsServices';
 import { Post } from '../../models/Posts';
 import styles from "./fakePost.module.css"
+import Button from '../../ui-kit/Button/Button';
 
 interface FakeCommentsProps {
     randomComments: TComments[];
@@ -72,7 +73,8 @@ const FakeComments: React.FC<FakeCommentsProps> = ({ randomComments, setRandomCo
                     <h3>{fakeComment.name}</h3>
                     <h4>{fakeComment.email}</h4>
                     <p>{fakeComment.body}</p>
-                    <button onClick={onDeleteComment}>Delete comment</button>
+                    {/* <button onClick={onDeleteComment}>Delete comment</button> */}
+                    <Button onClick={onDeleteComment} text={'Delete'} />
                 </article>
             ))}
         </div>

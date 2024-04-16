@@ -4,6 +4,7 @@ import { TPhoto } from "../../models/TPhotos";
 import ItemPhoto from "../photos/ItemPhoto";
 import styles from "./HomeContainer.module.css";
 import { NavLink } from "react-router-dom";
+import Button from "../../ui-kit/Button/Button";
 
 interface HomeProps {
     data: TPhoto[];
@@ -40,7 +41,7 @@ const Home: React.FC<HomeProps> = ({ data }) => {
                             <ItemPhoto photo={photo} />
                             <p className={styles.clampedText}>{photo.title}</p>
                             <NavLink to={`/photo/${photo.id}`}>
-                                <button className={styles.btnLearnMore}>Learn more</button>
+                                <Button text={"learn more"} className={styles.btnLearnMore} />
                             </NavLink>
                         </section>
                     ))}
