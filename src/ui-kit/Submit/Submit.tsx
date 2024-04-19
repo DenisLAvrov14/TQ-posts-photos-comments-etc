@@ -8,10 +8,14 @@ type Props = React.DetailedHTMLProps<
 >;
 
 const Submit: React.FC<Props> = ({ className, ...rest }) => {
+
+    const inputRef = React.useRef<HTMLInputElement>(null);
+
     return (
         <input
             type="submit"
             value="Submit"
+            ref={inputRef}
             {...rest}
             className={cx(styles.submit, className)}
         />

@@ -7,9 +7,22 @@
   width: 100%;
 }
 
-/* .inputs input:not(:last-child) {
+.inputs label:not(:last-child) {
   margin-right: 10px;
-} */
+}
+
+.inputs label:last-child {
+  flex-grow: 1;
+}
+
+.inputsP {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between; /* Равномерное распределение между элементами */
+  color: red;
+  margin: 0;
+}
 
 .inputsSubmitBtn {
   width: 100%;
