@@ -1,14 +1,17 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useTransition } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import photosServices from "../../services/photosServices";
 import { TPhoto } from "../../models/TPhotos";
 import styles from "./AddPhoto.module.css"
 import Button from "../../ui-kit/Button/Button";
+import { useTranslation } from "react-i18next";
 
 export const AddPhoto: React.FC = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const queryClient = useQueryClient();
+
+    const { t } = useTranslation()
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -58,7 +61,7 @@ export const AddPhoto: React.FC = () => {
     return (
         <form className={styles.addphoto} onSubmit={handleSubmit}>
             <label>
-                Choose file:
+                {t('choseFile')}
                 <input type="file" onChange={handleFileChange} />
             </label>
             {previewUrl && (
@@ -70,7 +73,7 @@ export const AddPhoto: React.FC = () => {
                     />
                 </div>
             )}
-            <Button text={"Upload"} type="submit" disabled={!selectedFile} />
+            <Button text={t("upload")} type="submit" disabled={!selectedFile} />
         </form>
     );
 };

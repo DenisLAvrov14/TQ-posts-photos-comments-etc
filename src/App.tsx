@@ -8,8 +8,6 @@ import GalleryScreen from "./components/screens/GalleryScreen";
 import PhotoCard from "./components/photos/Photo";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Suspense } from 'react';
-
 
 function App() {
   const queryClient = new QueryClient({

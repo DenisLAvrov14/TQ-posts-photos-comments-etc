@@ -6,13 +6,14 @@ import { useCallback } from "react";
 import { TPost } from "../../models/TPrepare";
 import styles from "./PostList.module.css"
 import Button from "../../ui-kit/Button/Button";
+import { useTranslation } from "react-i18next";
 
 export type Props = {
     post: TPost;
 };
 
-const PostsList: React.FC<Props> = ({ post }) => {
-    // const posts = useSelector(secetAllPosts)
+export const PostsList: React.FC<Props> = ({ post }) => {
+    const { t } = useTranslation();
     const queryClient = useQueryClient();
 
     const mutationDeletePost = useMutation({
@@ -32,7 +33,6 @@ const PostsList: React.FC<Props> = ({ post }) => {
             alert("Comment was deleted");
         } catch (error) {
             console.error("Error deleting comment:", error);
-            // Дополнительная логика обработки ошибок
             alert("Error deleting comment. Please try again later.");
         }
     }, [mutationDeletePost, post]);
@@ -52,6 +52,7 @@ const PostsList: React.FC<Props> = ({ post }) => {
         return <div>No data available</div>;
     }
 
+
     return (
         <section className={styles.postList}>
             <h2>Posts</h2>
@@ -60,8 +61,7 @@ const PostsList: React.FC<Props> = ({ post }) => {
                     <h3>{post.title}</h3>
                     <p>{post.body}</p>
                     <div className={styles.postBtn}>
-                        {/* <button onClick={handleDeletePost}> Delete post </button> */}
-                        <Button onClick={handleDeletePost} text={"Delete"} />
+                        <Button onClick={handleDeletePost} text={t('delete')} />
                     </div>
                     <Comments post={post} />
                 </article>

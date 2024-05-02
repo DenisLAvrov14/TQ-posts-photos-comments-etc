@@ -5,6 +5,7 @@ import ItemPhoto from "../photos/ItemPhoto";
 import styles from "./HomeContainer.module.css";
 import { NavLink } from "react-router-dom";
 import Button from "../../ui-kit/Button/Button";
+import { useTranslation } from "react-i18next";
 
 interface HomeProps {
     data: TPhoto[];
@@ -18,7 +19,9 @@ const sliderSettings = {
     speed: 500
 };
 
-const Home: React.FC<HomeProps> = ({ data }) => {
+export const Home: React.FC<HomeProps> = ({ data }) => {
+
+    const { t, i18n } = useTranslation();
 
     const [loadedPhotos, setLoadedPhotos] = useState<TPhoto[]>(data.slice(0, 9)); // Загружаем только первые 9 фотографий
     const [nextIndex, setNextIndex] = useState(9); // Следующий индекс для загрузки
@@ -41,7 +44,7 @@ const Home: React.FC<HomeProps> = ({ data }) => {
                             <ItemPhoto photo={photo} />
                             <p className={styles.clampedText}>{photo.title}</p>
                             <NavLink to={`/photo/${photo.id}`}>
-                                <Button text={"learn more"} className={styles.btnLearnMore} />
+                                <Button text={t('learn')} className={styles.btnLearnMore} />
                             </NavLink>
                         </section>
                     ))}

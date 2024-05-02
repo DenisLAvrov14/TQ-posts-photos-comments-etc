@@ -16,7 +16,7 @@ export const NavBar = () => {
             <nav>
                 <ul>
                     <li>
-                        <NavLink to="/home">{t("home")}</NavLink>
+                        <NavLink to="/home">{t('home')}</NavLink>
                     </li>
                     <li>
                         <NavLink to="/gallery">{t("gallery")}</NavLink>
@@ -28,7 +28,7 @@ export const NavBar = () => {
             </nav>
             <div className={styles.languageSelector}>
                 {Object.keys(locales).map((locale) => (
-                    <button title={locales[locale].title} type="submit" key={locale} onClick={() => i18n.changeLanguage(locale)} disabled={i18n.resolvedLanguage === locale}>
+                    <button type="submit" key={locale} onClick={() => i18n.changeLanguage(locale)} disabled={i18n.resolvedLanguage === locale}>
                         {locales[locale].title}
                     </button>
                 ))}

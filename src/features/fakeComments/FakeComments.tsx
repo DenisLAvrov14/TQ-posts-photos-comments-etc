@@ -6,6 +6,7 @@ import commentsServices from '../../services/commentsServices';
 import { Post } from '../../models/Posts';
 import styles from "./fakePost.module.css"
 import Button from '../../ui-kit/Button/Button';
+import { useTranslation } from 'react-i18next';
 
 interface FakeCommentsProps {
     randomComments: TComments[];
@@ -13,9 +14,11 @@ interface FakeCommentsProps {
     post: Post;
 }
 
-const FakeComments: React.FC<FakeCommentsProps> = ({ randomComments, setRandomComments, post }) => {
+export const FakeComments: React.FC<FakeCommentsProps> = ({ randomComments, setRandomComments, post }) => {
     const { data, isLoading, isError } = useComments();
     const queryClient = useQueryClient();
+
+    const { t } = useTranslation()
 
     useEffect(() => {
         if (data) {
@@ -73,8 +76,7 @@ const FakeComments: React.FC<FakeCommentsProps> = ({ randomComments, setRandomCo
                     <h3>{fakeComment.name}</h3>
                     <h4>{fakeComment.email}</h4>
                     <p>{fakeComment.body}</p>
-                    {/* <button onClick={onDeleteComment}>Delete comment</button> */}
-                    <Button onClick={onDeleteComment} text={'Delete'} />
+                    <Button onClick={onDeleteComment} text={t('delete')} />
                 </article>
             ))}
         </div>
